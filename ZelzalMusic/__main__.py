@@ -1,7 +1,3 @@
-#▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒✯ ʑᴇʟᴢᴀʟ_ᴍᴜsɪᴄ ✯▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-#▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒✯  T.me/ZThon   ✯▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-#▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒✯ T.me/Zelzal_Music ✯▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
-
 import asyncio
 import importlib
 
@@ -16,6 +12,8 @@ from ZelzalMusic.plugins import ALL_MODULES
 from ZelzalMusic.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
 
+
+loop = asyncio.get_event_loop_policy().get_event_loop()
 
 async def init():
     if (
@@ -39,7 +37,7 @@ async def init():
         pass
     await app.start()
     for all_module in ALL_MODULES:
-        importlib.import_module("ZelzalMusic.plugins" + all_module)
+        importlib.import_module(f"ZelzalMusic.plugins{all_module}")
     LOGGER("ZelzalMusic.plugins").info("Successfully Imported Modules...")
     await userbot.start()
     await Zelzaly.start()
@@ -53,9 +51,6 @@ async def init():
     except:
         pass
     await Zelzaly.decorators()
-    LOGGER("ZelzalMusic").info(
-        "\x5a\x65\x6c\x7a\x61\x6c\x20\x4d\x75\x73\x69\x63\x20\x42\x6f\x74\x20\x53\x74\x61\x72\x74\x65\x64\x20\x53\x75\x63\x63\x65\x73\x73\x66\x75\x6c\x6c\x79\x2e\x0a\x0a\x44\x6f\x6e\x27\x74\x20\x66\x6f\x72\x67\x65\x74\x20\x74\x6f\x20\x76\x69\x73\x69\x74\x20\x40\x5a\x54\x68\x6f\x6e"
-    )
     await idle()
     await app.stop()
     await userbot.stop()
@@ -63,4 +58,4 @@ async def init():
 
 
 if __name__ == "__main__":
-    asyncio.get_event_loop().run_until_complete(init())
+    loop.run_until_complete(init())
